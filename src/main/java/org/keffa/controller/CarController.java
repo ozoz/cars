@@ -1,5 +1,6 @@
-package org.keffa;
+package org.keffa.controller;
 
+import org.keffa.service.CarService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -13,7 +14,12 @@ public class CarController {
     @GetMapping("/{id}")
     @ResponseBody
     public Car getCar(@PathVariable("id") Integer id) {
-        return carService.getCarName(id);
+        return CarMapper.convertCarModelToApi(carService.getCarName(id));
+    }
+
+    @PostMapping(consumes = "application/json", produces = "application/json")
+    public Car createCar(@RequestBody Car car) {
+        return CarMapper.convertCarModelToApi(carService.createCar(CarMapper.convertCarApiToModel(car)));
     }
 
     @GetMapping("/toto")

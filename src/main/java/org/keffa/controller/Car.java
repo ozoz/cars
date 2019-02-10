@@ -1,4 +1,4 @@
-package org.keffa;
+package org.keffa.controller;
 
 public class Car {
 
